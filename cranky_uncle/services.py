@@ -51,11 +51,15 @@ class RapidProApiService(object):
             return None
 
 
-    def get_user_identifier(self, request):
+    def get_user_identifier(self, request, session_uid):
         if not request.session.session_key:
             request.session.save()
 
-        session_uid = request.session.setdefault('session-uid', str(uuid.uuid4()))
+        # session_uid = request.session.setdefault('session-uid', str(uuid.uuid4()))
+        # session_uid = request.COOKIES.get('cranky_uid', str(uuid.uuid4()))
         user = request.user.username if request.user.is_authenticated else session_uid
 
         return user
+    
+    def get_session_uid(self, request):
+        return request.COOKIES.get('cranky_uid', str(uuid.uuid4()))

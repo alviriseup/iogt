@@ -25,6 +25,8 @@
         .locked {
             cursor: default;
             opacity: 50%;
+            pointer-events: none;
+            user-select: none;
         }
         .denial-btn {
             color:#444;
@@ -53,8 +55,7 @@
         .locked .section-title:after {
             padding-left: 7px;
             content: "\f023";
-            font-family: "Font Awesome 6 Free";
-            font-weight: 900;
+            font: normal normal normal 14px / 1 FontAwesome;
         }
         .unlocked .section-title:after {
             padding-left: 7px;
@@ -77,6 +78,7 @@
             {% comment %} <div style="padding-bottom:4rem">
                 <h1>{{ db_data.message|safe }}</h1>
             </div> {% endcomment %}
+
 
             <div class="d-grid gap-2 col-6 mx-auto">
                 <form action="{% url 'cranky:cranky-quiz' slug=slug %}" method="POST">
