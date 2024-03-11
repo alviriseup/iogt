@@ -9,7 +9,7 @@ class InteractiveChannelChooserBlock(blocks.ChooserBlock):
     widget = forms.Select
 
 
-class CrankyUncleButtonBlock(blocks.StructBlock):
+class InteractiveButtonBlock(blocks.StructBlock):
     subject = blocks.CharBlock()
     button_text = blocks.CharBlock()
     trigger_string = blocks.CharBlock()
