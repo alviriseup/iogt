@@ -18,7 +18,7 @@ from wagtail.core.models import Page
 
 
 from .services import RapidProApiService
-from .models import RapidPro, CrankyUncle
+from .models import RapidPro, Interactive
 from .forms import CrankySendMessageForm
 from .models import RapidPro
 from .serializers import RapidProSerializer
@@ -246,7 +246,7 @@ class DenialQuizSendMessageView(TemplateView):
     def get(self, request, slug, trigger_string):
         # return HttpResponse(slug)
         core_page_id = Page.objects.filter(slug=slug).first().id
-        uncle_page = CrankyUncle.objects.filter(page_ptr_id=core_page_id).first()
+        uncle_page = Interactive.objects.filter(page_ptr_id=core_page_id).first()
         url = uncle_page.channel.request_url
         # return HttpResponse(url)
         if not request.session.session_key:

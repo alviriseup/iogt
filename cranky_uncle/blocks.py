@@ -2,10 +2,10 @@ from django import forms
 from wagtail.core import blocks
 
 
-class CrankyUncleChannelChooserBlock(blocks.ChooserBlock):
-    from .models import CrankyUncleChannel
+class InteractiveChannelChooserBlock(blocks.ChooserBlock):
+    from .models import InteractiveChannel
 
-    target_model = CrankyUncleChannel
+    target_model = InteractiveChannel
     widget = forms.Select
 
 
@@ -13,7 +13,7 @@ class CrankyUncleButtonBlock(blocks.StructBlock):
     subject = blocks.CharBlock()
     button_text = blocks.CharBlock()
     trigger_string = blocks.CharBlock()
-    cranky_uncle_channel = CrankyUncleChannelChooserBlock()
+    cranky_uncle_channel = InteractiveChannelChooserBlock()
 
     class Meta:
         icon = 'tag'
