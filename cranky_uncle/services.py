@@ -13,6 +13,9 @@ class RapidProApiService(object):
     def __init__(self):
         pass
 
+    def test(self):
+        return str(uuid.uuid4())
+
     def get_current_contact(self, user: object = None):
         response = requests.get(
             f'{self.RAPID_URL}/api/v2/flows.json',
