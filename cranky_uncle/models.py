@@ -11,7 +11,7 @@ from home.mixins import PageUtilsMixin, TitleIconMixin
 from django.utils.translation import get_language
 
 
-class CrankyUncleChannel(models.Model):
+class InteractiveChannel(models.Model):
     display_name = models.CharField(
         max_length=80,
         help_text=_('Name for the cranky uncle bot that the user will seen when interacting with it'),
@@ -29,7 +29,7 @@ class CrankyUncleChannel(models.Model):
         return f"{self.display_name}, {self.request_url}"
 
 
-class CrankyUncle(Page, PageUtilsMixin, TitleIconMixin):
+class Interactive(Page, PageUtilsMixin, TitleIconMixin):
     parent_page_types = [
         "home.HomePage", "home.Section", 'home.FooterIndexPage'
     ]
@@ -45,7 +45,7 @@ class CrankyUncle(Page, PageUtilsMixin, TitleIconMixin):
         help_text=_("Language short code will postfix after trigger string e.g string_en")
         )
     channel = models.ForeignKey(
-        CrankyUncleChannel,
+        InteractiveChannel,
         on_delete=models.PROTECT,
         null=True,
         blank=True,
@@ -75,7 +75,7 @@ class CrankyUncle(Page, PageUtilsMixin, TitleIconMixin):
 
 class CrankyUncleIndexPage(Page):
     parent_page_types = ['home.HomePage']
-    subpage_types = ['cranky_uncle.CrankyUncle']
+    subpage_types = ['cranky_uncle.Interactive']
 
 
 class RapidPro(models.Model):

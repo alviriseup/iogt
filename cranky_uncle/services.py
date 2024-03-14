@@ -1,7 +1,7 @@
 import logging, requests
 import uuid
 
-from cranky_uncle.models import CrankyUncle
+from cranky_uncle.models import Interactive
 from wagtail.core.models import Page
 
 
@@ -41,7 +41,7 @@ class RapidProApiService(object):
         
         # TODO: optimize dynamic url allocation............
         core_page_id = Page.objects.filter(slug=slug).first().id
-        uncle_page = CrankyUncle.objects.filter(page_ptr_id=core_page_id).first()
+        uncle_page = Interactive.objects.filter(page_ptr_id=core_page_id).first()
         url = uncle_page.channel.request_url
 
         try:

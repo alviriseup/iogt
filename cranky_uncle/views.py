@@ -11,7 +11,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from wagtail.core.models import Page
 from .services import RapidProApiService
-from .models import RapidPro, CrankyUncle
+from .models import RapidPro, Interactive
 from .forms import CrankySendMessageForm
 from .models import RapidPro
 from .serializers import RapidProSerializer

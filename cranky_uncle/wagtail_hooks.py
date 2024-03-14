@@ -1,20 +1,20 @@
 from wagtail.contrib.modeladmin.options import (
     ModelAdminGroup, ModelAdmin, modeladmin_register
 )
-from .models import CrankyUncleChannel
+from .models import InteractiveChannel
 
 
-class CrankyUncleChannelAdmin(ModelAdmin):
-    model = CrankyUncleChannel
-    menu_label = 'Cranky Uncle Channels'
+class InteractiveChannelAdmin(ModelAdmin):
+    model = InteractiveChannel
+    menu_label = 'Interactive RapidPro Channels'
     menu_icon = 'tag'
     # index_template_name = ''
 
 
-class CrankyUncleGroup(ModelAdminGroup):
-    menu_label = 'Cranky Uncle'
+class InteractiveGroup(ModelAdminGroup):
+    menu_label = 'Interactive'
     menu_icon = 'tag'
-    items = (CrankyUncleChannelAdmin,)
+    items = (InteractiveChannelAdmin,)
 
 
-modeladmin_register(CrankyUncleGroup)
+modeladmin_register(InteractiveGroup)
