@@ -34,7 +34,7 @@ class Interactive(Page, PageUtilsMixin, TitleIconMixin):
         "home.HomePage", "home.Section", 'home.FooterIndexPage'
     ]
     subpage_types = []
-    # template = 'cranky/cranky_index_page.html'
+    template = 'cranky_uncle/cranky_uncle.html'
     # show_in_menus_default = True
 
     button_text = models.CharField(max_length=255, null=True, blank=True)
