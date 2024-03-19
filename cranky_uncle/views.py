@@ -24,8 +24,8 @@ class CrankyUncleQuizView(TemplateView):
         context = super().get_context_data()
         slug = self.kwargs['slug']
         
-        session_uid = request.COOKIES.get('cranky_uid')
-        user = RapidProApiService().get_user_identifier(request, session_uid)
+        # session_uid = request.COOKIES.get('cranky_uid')
+        user = RapidProApiService().get_user_identifier(request)
         
         if not user:
             return redirect('/')
@@ -35,7 +35,7 @@ class CrankyUncleQuizView(TemplateView):
         
         if(referer_lang != current_lang):
             core_page_id = Page.objects.filter(slug=slug).first().id
-            uncle_page = CrankyUncle.objects.filter(page_ptr_id=core_page_id).first()
+            uncle_page = Interactive.objects.filter(page_ptr_id=core_page_id).first()
 
             data = {
                 'from': user,
@@ -86,10 +86,10 @@ class CrankyUncleQuizView(TemplateView):
         form = CrankySendMessageForm(request.POST)
         cranky_page_url = request.META.get('HTTP_REFERER')
         
-        session_uid = request.COOKIES.get('cranky_uid', str(uuid.uuid4()))
+        # session_uid = request.COOKIES.get('cranky_uid', str(uuid.uuid4()))
         
         if form.is_valid():
-            user = RapidProApiService().get_user_identifier(request, session_uid)
+            user = RapidProApiService().get_user_identifier(request)
 
             data = {
                 'from': user,
@@ -98,7 +98,7 @@ class CrankyUncleQuizView(TemplateView):
             
             response = RapidProApiService().send_message(data=data, slug=slug)
             response = redirect('cranky:cranky-quiz', slug=slug)
-            response.set_cookie(key='cranky_uid', value=session_uid)
+            # response.set_cookie(key='cranky_uid', value=session_uid)
             return response
         else:
             # Handle invalid form

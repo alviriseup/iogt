@@ -1,8 +1,8 @@
 import logging, requests
 import uuid
-
 from cranky_uncle.models import Interactive
 from wagtail.core.models import Page
+from django.contrib.auth import get_user_model
 
 
 
@@ -54,15 +54,23 @@ class RapidProApiService(object):
             return None
 
 
-    def get_user_identifier(self, request, session_uid):
+    def get_user_identifier(self, request):
         if not request.session.session_key:
             request.session.save()
 
-        # session_uid = request.session.setdefault('session-uid', str(uuid.uuid4()))
+        session_uid = request.session.setdefault('cranky_uuid', str(uuid.uuid4()))
         # session_uid = request.COOKIES.get('cranky_uid', str(uuid.uuid4()))
-        user = request.user.username if request.user.is_authenticated else session_uid
+        
+        # Get the authenticated user
+        user = request.user
 
-        return user
+        # If the user is authenticated and has no 'cranky_uuid' set, update it
+        if user.is_authenticated and not user.cranky_uuid:
+            user_model = get_user_model()
+            user.cranky_uuid = session_uid
+            user_model.objects.filter(pk=user.pk).update(cranky_uuid=session_uid)
+
+        return session_uid
     
     def get_session_uid(self, request):
         return request.COOKIES.get('cranky_uid', str(uuid.uuid4()))

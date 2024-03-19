@@ -17,6 +17,8 @@ class User(AbstractUser):
     display_name = models.CharField('display name', max_length=255, null=True, blank=True)
     email = models.EmailField('email address', null=True, blank=True)
     terms_accepted = models.BooleanField(default=False)
+    
+    cranky_uuid = models.CharField(max_length=255, null=True, blank=True)
 
     has_filled_registration_survey = models.BooleanField(default=False)
     has_viewed_registration_survey = models.BooleanField(default=False)
